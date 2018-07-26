@@ -1,6 +1,4 @@
 // babel plugin
-// 解决inverted FlatList在emui 5.0/android 7.0上失效问题
-// @see: https://github.com/facebook/react-native/pull/14646?from=timeline&isappinstalled=0
 
 const isVirtualizedListModuleExports = (t, node) => {
   return (
