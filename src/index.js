@@ -45,13 +45,13 @@ module.exports = function({types: t}) {
           isStyleSheetCreateCallExpression(t, declaration.init)
         ) {
           return path.get('declarations.0.init').replaceWithSourceString(`
-             StyleSheet.create({
-              verticallyInverted: {
-                transform: [{scaleY: -1, perspective: 1}],
-              },
-              horizontallyInverted: {
-                transform: [{scaleX: -1, perspective: 1}],
-              },
+            StyleSheet.create({
+                verticallyInverted: {
+                    transform: [{scaleY: -1}, {perspective: 1}],
+                },
+                horizontallyInverted: {
+                    transform: [{scaleX: -1}, {perspective: 1}],
+                }
             })
           `);
         }

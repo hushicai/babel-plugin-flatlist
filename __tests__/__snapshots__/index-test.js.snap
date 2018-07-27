@@ -50,13 +50,15 @@ module.exports = VirtualizedList;
 const styles = StyleSheet.create({
   verticallyInverted: {
     transform: [{
-      scaleY: -1,
+      scaleY: -1
+    }, {
       perspective: 1
     }]
   },
   horizontallyInverted: {
     transform: [{
-      scaleX: -1,
+      scaleX: -1
+    }, {
       perspective: 1
     }]
   }
