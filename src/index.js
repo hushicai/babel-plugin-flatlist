@@ -25,11 +25,23 @@ const isStyleSheetCreateCallExpression = (t, node) => {
   );
 };
 
+const VirtualizedListPath = 'react-native/Libraries/Lists/VirtualizedList';
+
 module.exports = function({types: t}) {
   return {
     name: 'Rewrite React Native VirtualizedList perspective',
     visitor: {
       VariableDeclaration(path, state) {
+        let filename = state.file.opts.filename;
+
+        // unknown for test
+        // VirtualizedList for release
+        if (filename !== 'unknown' &&
+         filename.lastIndexOf(VirtualizedListPath) === -1
+        ) {
+          return;
+        }
+
         let sibling = path.getNextSibling().node;
 
         if (!isVirtualizedListModuleExports(t, sibling)) {
@@ -44,6 +56,9 @@ module.exports = function({types: t}) {
           isStylesIdentifier(t, declaration.id) &&
           isStyleSheetCreateCallExpression(t, declaration.init)
         ) {
+          console.log('babel-plugin-flatlist found StyleSheet');
+          console.log('babel-plugin-flatlist add perspective');
+
           // const Platform = require('Platform');
           path.insertBefore(
             t.variableDeclaration('const', [
