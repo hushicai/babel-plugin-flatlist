@@ -77,22 +77,22 @@ module.exports = VirtualizedList;
 
 const Platform = require(\\"Platform\\");
 
-const perspective = Platfrom.select({
+const perspective = Platform.select({
   android: {
     perspective: 1
   },
-  ios: {}
+  ios: null
 });
 const styles = StyleSheet.create({
   verticallyInverted: {
     transform: [{
       scaleY: -1
-    }, perspective]
+    }, perspective].filter(Boolean)
   },
   horizontallyInverted: {
     transform: [{
       scaleX: -1
-    }, perspective]
+    }, perspective].filter(Boolean)
   }
 });
 
