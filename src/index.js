@@ -54,10 +54,10 @@ module.exports = function({types: t}) {
             ])
           );
           /**
-           * const perspective = {
+           * const perspective = Platform.select({
            *   android: {perspective: 1},
            *   ios: {}
-           * };
+           * });
            */
           path.insertBefore(
             t.variableDeclaration('const', [
@@ -65,7 +65,7 @@ module.exports = function({types: t}) {
                 t.identifier('perspective'),
                 t.callExpression(
                   t.memberExpression(
-                    t.identifier('Platfrom'),
+                    t.identifier('Platform'),
                     t.identifier('select')
                   ),
                   [
