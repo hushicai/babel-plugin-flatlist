@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-flatlist",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Rewrite React Native FlatList",
   "main": "index.js",
   "scripts": {
