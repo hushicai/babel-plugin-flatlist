@@ -27,7 +27,7 @@ const isStyleSheetCreateCallExpression = (t, node) => {
 
 module.exports = function({types: t}) {
   return {
-    name: 'Rewrite VirtualizedList perspective',
+    name: 'Rewrite React Native VirtualizedList perspective',
     visitor: {
       VariableDeclaration(path, state) {
         let sibling = path.getNextSibling().node;
@@ -44,13 +44,52 @@ module.exports = function({types: t}) {
           isStylesIdentifier(t, declaration.id) &&
           isStyleSheetCreateCallExpression(t, declaration.init)
         ) {
-          return path.get('declarations.0.init').replaceWithSourceString(`
+          // const Platform = require('Platform');
+          path.insertBefore(
+            t.variableDeclaration('const', [
+              t.variableDeclarator(
+                t.identifier('Platform'),
+                t.callExpression(t.identifier('require'), [t.stringLiteral('Platform')])
+              )
+            ])
+          );
+          /**
+           * const perspective = {
+           *   android: {perspective: 1},
+           *   ios: {}
+           * };
+           */
+          path.insertBefore(
+            t.variableDeclaration('const', [
+              t.variableDeclarator(
+                t.identifier('perspective'),
+                t.callExpression(
+                  t.memberExpression(
+                    t.identifier('Platfrom'),
+                    t.identifier('select')
+                  ),
+                  [
+                    t.objectExpression([
+                      t.objectProperty(
+                        t.identifier('android'),
+                        t.objectExpression([
+                          t.objectProperty(t.identifier('perspective'), t.numericLiteral(1))
+                        ])
+                      ),
+                      t.objectProperty(t.identifier('ios'), t.objectExpression([]))
+                    ])
+                  ]
+                )
+              )
+            ])
+          );
+          path.get('declarations.0.init').replaceWithSourceString(`
             StyleSheet.create({
                 verticallyInverted: {
-                    transform: [{scaleY: -1}, {perspective: 1}],
+                  transform: [{scaleY: -1}, perspective],
                 },
                 horizontallyInverted: {
-                    transform: [{scaleX: -1}, {perspective: 1}],
+                  transform: [{scaleX: -1}, perspective],
                 }
             })
           `);

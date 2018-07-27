@@ -19,6 +19,22 @@ module.exports = VirtualizedList;
     snapshot: true
   },
   {
+    title: 'both `StyleSheet.create` and `export default`',
+    code: `
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{scaleY: -1}],
+  },
+  horizontallyInverted: {
+    transform: [{scaleX: -1}],
+  },
+});
+
+export default VirtualizedList;
+`,
+    snapshot: true
+  },
+  {
     title: 'both `StyleSheet.create` and `module.exports`, but not sibling',
     code: `
 const styles = StyleSheet.create({
