@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rewrite VirtualizedList perspective both \`StyleSheet.create\` and \`module.exports\`, but not sibling: both \`StyleSheet.create\` and \`module.exports\`, but not sibling 1`] = `
+"
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{scaleY: -1}],
+  },
+  horizontallyInverted: {
+    transform: [{scaleX: -1}],
+  },
+});
+
+const a = 1;
+
+module.exports = VirtualizedList;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{ scaleY: -1 }]
+  },
+  horizontallyInverted: {
+    transform: [{ scaleX: -1 }]
+  }
+});
+
+const a = 1;
+
+module.exports = VirtualizedList;
+"
+`;
+
+exports[`Rewrite VirtualizedList perspective both \`StyleSheet.create\` and \`module.exports\`: both \`StyleSheet.create\` and \`module.exports\` 1`] = `
+"
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{scaleY: -1}],
+  },
+  horizontallyInverted: {
+    transform: [{scaleX: -1}],
+  },
+});
+
+module.exports = VirtualizedList;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{
+      scaleY: -1,
+      perspective: 1
+    }]
+  },
+  horizontallyInverted: {
+    transform: [{
+      scaleX: -1,
+      perspective: 1
+    }]
+  }
+});
+
+module.exports = VirtualizedList;
+"
+`;
+
+exports[`Rewrite VirtualizedList perspective only \`StyleSheet.create\`: only \`StyleSheet.create\` 1`] = `
+"
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{scaleY: -1}],
+  },
+  horizontallyInverted: {
+    transform: [{scaleX: -1}],
+  },
+});
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{ scaleY: -1 }]
+  },
+  horizontallyInverted: {
+    transform: [{ scaleX: -1 }]
+  }
+});
+"
+`;
+
+exports[`Rewrite VirtualizedList perspective styles object and \`module.exports\`: styles object and \`module.exports\` 1`] = `
+"
+const styles = {
+  verticallyInverted: {
+    transform: [{scaleY: -1}],
+  },
+  horizontallyInverted: {
+    transform: [{scaleX: -1}],
+  },
+};
+
+module.exports = VirtualizedList;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const styles = {
+  verticallyInverted: {
+    transform: [{ scaleY: -1 }]
+  },
+  horizontallyInverted: {
+    transform: [{ scaleX: -1 }]
+  }
+};
+
+module.exports = VirtualizedList;
+"
+`;

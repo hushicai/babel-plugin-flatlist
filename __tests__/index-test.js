@@ -3,29 +3,7 @@ const pluginTester = require('babel-plugin-tester');
 
 const tests = [
   {
-    title: 'case 1',
-    code: `;
-const styles = StyleSheet.create({
-  verticallyInverted: {
-    transform: [{scaleY: -1}],
-  },
-  horizontallyInverted: {
-    transform: [{scaleX: -1}],
-  },
-});
-`,
-    snapshot: true
-  },
-  {
-    title: 'case 2',
-    code: `
-    module.exports = VirtualizedList;
-`,
-    snapshot: true,
-    pluginOptions: { commonjs: true }
-  },
-  {
-    title: 'case 3',
+    title: 'both `StyleSheet.create` and `module.exports`',
     code: `
 const styles = StyleSheet.create({
   verticallyInverted: {
@@ -41,7 +19,7 @@ module.exports = VirtualizedList;
     snapshot: true
   },
   {
-    title: 'case 4',
+    title: 'both `StyleSheet.create` and `module.exports`, but not sibling',
     code: `
 const styles = StyleSheet.create({
   verticallyInverted: {
@@ -59,7 +37,21 @@ module.exports = VirtualizedList;
     snapshot: true
   },
   {
-    title: 'case 5',
+    title: 'only `StyleSheet.create`',
+    code: `
+const styles = StyleSheet.create({
+  verticallyInverted: {
+    transform: [{scaleY: -1}],
+  },
+  horizontallyInverted: {
+    transform: [{scaleX: -1}],
+  },
+});
+`,
+    snapshot: true
+  },
+  {
+    title: 'styles object and `module.exports`',
     code: `
 const styles = {
   verticallyInverted: {
@@ -73,6 +65,15 @@ const styles = {
 module.exports = VirtualizedList;
 `,
     snapshot: true
+  },
+  {
+    title: 'styles primitive and `module.exports`',
+    code: `
+const styles = 1;
+
+module.exports = VirtualizedList;
+`,
+    snapshot: false
   }
 ];
 
