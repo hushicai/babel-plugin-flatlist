@@ -56,7 +56,7 @@ module.exports = function({types: t}) {
           /**
            * const perspective = Platform.select({
            *   android: {perspective: 1},
-           *   ios: {}
+           *   ios: null
            * });
            */
           path.insertBefore(
@@ -76,7 +76,7 @@ module.exports = function({types: t}) {
                           t.objectProperty(t.identifier('perspective'), t.numericLiteral(1))
                         ])
                       ),
-                      t.objectProperty(t.identifier('ios'), t.objectExpression([]))
+                      t.objectProperty(t.identifier('ios'), t.nullLiteral())
                     ])
                   ]
                 )
@@ -86,10 +86,10 @@ module.exports = function({types: t}) {
           path.get('declarations.0.init').replaceWithSourceString(`
             StyleSheet.create({
                 verticallyInverted: {
-                  transform: [{scaleY: -1}, perspective],
+                  transform: [{scaleY: -1}, perspective].filter(Boolean),
                 },
                 horizontallyInverted: {
-                  transform: [{scaleX: -1}, perspective],
+                  transform: [{scaleX: -1}, perspective].filter(Boolean),
                 }
             })
           `);
