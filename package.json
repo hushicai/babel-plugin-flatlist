@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-flatlist",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "React Native 0.49以下版本在某些Android机下inverted FlatList失效，表现为页面空白，问题主要集中出现在华为EMUI 5.0、Android 7.0.0等机型上。",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -11,5 +11,14 @@
   "devDependencies": {
     "babel-plugin-tester": "^5.4.0",
     "jest": "^23.4.1"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hushicai/babel-plugin-flatlist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hushicai/babel-plugin-flatlist/issues"
+  },
+  "homepage": "https://github.com/hushicai/babel-plugin-flatlist#readme"
 }
